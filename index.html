@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XXXXXXX');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSimbel's</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand" onclick="navigateTo('beranda')">
+                <h1>🌱 EcoSimbel's</h1>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a class="nav-link" data-page="beranda">Beranda</a></li>
+                <li><a class="nav-link" data-page="tentang">Tentang Kami</a></li>
+                <li><a class="nav-link" data-page="tim">Tim Kami</a></li>
+                <li><a class="nav-link" data-page="layanan">Layanan</a></li>
+                <li><a class="nav-link" data-page="kontak">Kontak</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <!-- Beranda Page -->
+    <div id="beranda" class="page">
+        <section class="hero">
+            <div class="hero-content hero-box">
+                <h1>Transformasi Sampah Menjadi Nilai</h1>
+                <p>Kami adalah solusi terpadu untuk mengelola sampah domestik dan menciptakan ekonomi sirkular yang berkelanjutan</p>
+                <button class="btn btn-primary" onclick="navigateTo('kontak')">Bergabunglah Dengan Kami</button>
+            </div>
+        </section>
+        
+        <button onclick="trackAction('Tambah Sampah Organik')">
+  ➕ Tambah
+</button>
+
+         <section class="hero">
+            <div class="hero-content hero-box">
+                <h1>Pengertian Program Adiwiyata</h1>
+                <p> Program Adiwiyata adalah salah satu program kementerian negara lingkungan hidup dalam rangka mencorong terciptanya pengetahuan dan kesadaran warga sekolah dalam upaya pelestarian lingkungan hidup. Dalam program ini diharapkan setiap warga sekolah ikut terlibat dalam kegiatan sekolah menuju lingkungan yang sehat dan menghindarkan dampak lingkungan yang negatif. </p>
+
+<p>Dalam pelaksanaannya sekolah bekerja sama dengan praktek holder menggulirkan program Adiwiyata ini dengan harapan dapat mengajak warga sekolah untuk melakukan proses belajar mengajar tentang materi lingkungan hidup Sehingga di kemudian hari dapat turut berpartisipasi melestarikan dan menjaga lingkungan hidup di sekolah dan di sekitarnya</p>
+
+<p>Kata-kata Adiwiyata berasal dari 2 kata Sansekerta Adi dan Wiyata Adi mempunyai makna Besar Agung baik ideal atau sempurna Wiyata mempunyai makna tempat di mana seseorang mendapat ilmu pengetahuan norma dan etika dalam berkehidupan sosial bila kedua kata tersebut digabung secara keseluruhan Adiwiyata mempunyai pengertian atau makna tempat berbagi norma serta etika yang dapat menjadi dasar manusia menuju terciptanya kesejahteraan hidup kita dan menuju cita-cita pembangunan berkelanjutan</p>
+
+<p>Tujuan program Adiwiyata 
+Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelajaran dan menyadarkan warga sekolah sehingga di kemudian hari warga sekolah dapat turut bertanggung jawab dalam upaya-upaya penyelamatan lingkungan hidup dan pembangunan berkelanjutan</p>
+
+<p>Kegiatan program Adiwiyata adalah mewujudkan kelembagaan sekolah yang peduli dan berbudaya lingkungan bagi sekolah dasar dan menengah di Indonesia</p>
+            </div>
+        </section>
+        
+          <section class="hero">
+            <div class="hero-content hero-box">
+                <h1>5 Norma Dasar Adiwiyata</h1>
+                <p>1. Kebersamaan</p>
+<p>2. Keterbukaan </p>
+<p>3. Kesetaraan </p>
+<p>4. Kejujuran </p>
+<p>5. Keadilan dn Kelestarian Fungsi Lingkungan Hidup dan Sumber Daya Alam</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Tentang Kami Page -->
+    <div id="tentang" class="page">
+        <section class="content-section gray">
+            <div class="container">
+                <h2>Tentang EcoSimbel's</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>Transformasi dari EcoSimbel's</h3>
+                        <p>Didirikan di Jalan Gubernur H. Ahmad Bastari, 15 Ulu, Kecamatan Seberang Ulu I, Kota Palembang, Sumatera Selatan, Kami bergerak dalam kegiatan melalui pengelolaan dan pendataan sampah secara online dengan memanfaatkan teknologi</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>Naungan SMA Negeri 19 Palembang</h3>
+                        <p>EcoSimbel's berada di bawah naungan SMA Negeri 19 Palembang. Kami dibangun untuk menciptkan lingkungan sekolah yang bersih, teknologi daur ulang dan perkumpulan berbasis lingkungan di SMA Negeri 19 Palembang.</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>Target Pengelolaan Sampah</h3>
+                        <p>Dengan solusi permasalahan lingkungan yang komprehensif, target kami adalah 50% dari total sampah yang ada bisa terkelola dengan baik melalui sistem pengelolaan yang terintegrasi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Tim Kami Page -->
+    <div id="tim" class="page">
+        <section class="content-section gray">
+            <div class="container">
+                <h2>Tim Kepemimpinan Kami</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Kepsek.jpg" alt="Foto Profil">
+</div>
+                        <h3>Binti Koniaturrohmah, M.Pd</h3>
+                        <p class="position">Kepala SMA Negeri 19 Palembang</p>
+                        <p class="description">Penanggung jawab utama dan pengambil kebijakan, serta memberikan dukungan dan arahan strategis agar EcoSimbel’s berjalan selaras dengan visi sekolah dan program Adiwiyata.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Kurikulum.jpg" alt="Foto Profil">
+</div>
+                        <h3>Efni Lastiyani Septiasari, S.Pd.,M.M</h3>
+                        <p class="position">Wakil Kurikulum SMA Negeri 19 Palembang</p>
+                        <p class="description">Mengintegrasikan program EcoSimbel’s ke dalam kegiatan pembelajaran dan projek penguatan profil pelajar Pancasila (P5) agar pembelajaran tidak hanya bersifat teoretis, tetapi juga aplikatif.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Kesiswaan.jpg" alt="Foto Profil">
+</div>
+                        <h3>Agus Yoga Saputra, S.Pd.,Gr.MM</h3>
+                        <p class="position">Wakil Kesiswaan SMA Negeri 19 Palembang</p>
+                        <p class="description">Mendorong keterlibatan aktif siswa dalam EcoSimbel’s melalui kegiatan ekstrakurikuler, organisasi siswa, dan pembinaan karakter peduli lingkungan.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Humas.jpg" alt="Foto Profil">
+</div>
+                        <h3>David Hendrianto, S.Pd., M.Si</h3>
+                        <p class="position">Wakil Humas SMA Negeri 19 Palembang</p>
+                        <p class="description">Bertugas menyampaikan informasi dan publikasi kegiatan EcoSimbel’s kepada masyarakat, orang tua, dan pihak luar serta menjalin kerja sama dengan mitra lingkungan.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Sarana.jpg" alt="Foto Profil">
+</div>
+                        <h3>Sukanto, S.Pd., M.Pd</h3>
+                        <p class="position">Sarana Prasarana SMA Negeri 19 Palembang</p>
+                        <p class="description">Menyediakan dan mengelola fasilitas pendukung seperti tempat pemilahan sampah, sarana kebersihan, serta mendukung infrastruktur fisik EcoSimbel’s di lingkungan sekolah.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Adiwiyata.jpg" alt="Foto Profil">
+</div>
+                        <h3>Edwin Effendi, S.Pd</h3>
+                        <p class="position">Ketua Adiwiyata SMA Negeri 19 Palembang</p>
+                        <p class="description">Mengkoordinasikan EcoSimbel’s sebagai bagian dari program Adiwiyata sekolah serta memastikan kegiatan pengelolaan lingkungan berjalan sesuai standar dan indikator Adiwiyata.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Pembimbing.jpg" alt="Foto Profil">
+</div>
+                        <h3>Ardiansyah, S.S., S.Kom</h3>
+                        <p class="position">Guru Pembimbing</p>
+                        <p class="description">Memberikan bimbingan, arahan teknis, serta pendampingan kepada siswa dalam pengelolaan EcoSimbel’s, baik dari aspek perencanaan, pelaksanaan, maupun evaluasi kegiatan.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Rizki.jpg" alt="Foto Profil">
+</div>
+                        <h3>Rizki Asmadi</h3>
+                        <p class="position">Ketua EcoSimbel's Gen-1</p>
+                        <p class="description">Bertanggung jawab dalam mengoordinasikan seluruh kegiatan EcoSimbel’s, memimpin tim, serta memastikan program pengelolaan sampah dan edukasi lingkungan berjalan dengan baik.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Khanza.jpg" alt="Foto Profil">
+</div>
+                        <h3>Khanza Fithria Meyrori</h3>
+                        <p class="position">Wakil Ketua EcoSimbel's Gen-1</p>
+                        <p class="description">Membantu ketua dalam menjalankan tugas organisasi, mengoordinasikan anggota, serta menggantikan peran ketua apabila berhalangan.</p>
+                    </div>
+                    
+                    <div class="team-card">
+<div class="team-avatar">
+    <img src="Nyimas.jpg" alt="Foto Profil">
+</div>
+                        <h3>Nyimas Nabilah Rizkiah</h3>
+                        <p class="position">Sekretaris EcoSimbel's Gen-1</p>
+                        <p class="description">Mengelola administrasi, dokumentasi, laporan kegiatan, serta pengelolaan data dan informasi pada sistem web EcoSimbel’s.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Layanan Page -->
+    <div id="layanan" class="page">
+        <section class="content-section">
+            <div class="container">
+                <h2>Layanan Kami</h2>
+                <div class="services-grid">
+
+            <div class="service-item" onclick="navigateTo('edukasi')" style="cursor:pointer">
+                <div class="service-icon">📚</div>
+                <h3>Edukasi</h3>
+                <p>Program edukasi lingkungan berbasis Adiwiyata.</p>
+            </div>
+
+            <div class="service-item" onclick="navigateTo('pendampingan')" style="cursor:pointer">
+                <div class="service-icon">🤝</div>
+                <h3>Pendampingan</h3>
+                <p>Pendampingan unit bank sampah dan sekolah.</p>
+            </div>
+
+            <div class="service-item" onclick="navigateTo('pengolahan')" style="cursor:pointer">
+                <div class="service-icon">♻️</div>
+                <h3>Pengolahan Limbah</h3>
+                <p>Pengelolaan dan daur ulang sampah ramah lingkungan.</p>
+            </div>
+
+            <div class="service-item" onclick="navigateTo('konsultasi')" style="cursor:pointer">
+                <div class="service-icon">🏢</div>
+                <h3>Konsultasi</h3>
+                <p>Konsultasi pengelolaan lingkungan untuk berbagai instansi.</p>
+            </div>
+
+            </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="edukasi" class="page">
+    <section class="content-section gray">
+        <div class="container">
+            <h2>Edukasi Adiwiyata</h2>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Program Adiwiyata</h3>
+                    <p>
+                        Edukasi mengenai sekolah peduli dan berbudaya lingkungan
+                        melalui pembelajaran dan praktik nyata.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="pendampingan" class="page">
+    <section class="content-section">
+        <div class="container">
+            <h2>Pendampingan Lingkungan</h2>
+
+            <p style="text-align:center">
+                Pendampingan bank sampah, kegiatan lingkungan,
+                serta program sekolah berkelanjutan.
+            </p>
+        </div>
+    </section>
+</div>
+
+<div id="pengolahan" class="page">
+    <section class="content-section gray">
+        <div class="container">
+            <h2>Pengelolaan Sampah</h2>
+
+    <div style="text-align:center; margin-bottom:20px">
+    <button onclick="loginAdmin()">🔐 Login Admin</button>
+    <button onclick="logoutAdmin()">🚪 Logout</button>
+</div>
+
+<div style="margin-top:60px">
+
+    <h2 style="text-align:center; color:#1a4d2e">
+        📊 Grafik Pengelolaan Sampah
+    </h2>
+
+    <canvas id="wasteChart" height="120"></canvas>
+
+    <h2 style="text-align:center; color:#1a4d2e; margin-top:50px">
+        🧾 Histori Pengelolaan Sampah
+    </h2>
+
+    <div style="overflow-x:auto">
+        <table class="histori-table">
+            <thead>
+                <tr>
+                    <th>Waktu</th>
+                    <th>Jenis Sampah</th>
+                    <th>Perubahan</th>
+                </tr>
+            </thead>
+            <tbody id="historiBody"></tbody>
+        </table>
+    </div>
+
+</div>
+
+
+            <div class="waste-container">
+
+                <div class="waste-card organik">
+                    <img src="organic.jpeg" class="waste-logo" alt="Organik">
+                    <h3>Organik</h3>
+                    <p id="organikCount">0 kg</p>
+                    <input type="number" step="0.1" id="input-organik" placeholder="+ / - jumlah (kg)">
+                    <button class="btn-konfirmasi" onclick="konfirmasiSampah('organik')">
+    ✔ Konfirmasi
+</button>
+
+                </div>
+
+                <div class="waste-card anorganik">
+                    <img src="anorganic.jpeg" class="waste-logo" alt="Anorganik">
+                    <h3>Anorganik</h3>
+                    <p id="anorganikCount">0 kg</p>
+                    <input type="number" step="0.1" id="input-anorganik" placeholder="+ / - jumlah (kg)">
+                  <button class="btn-konfirmasi" onclick="konfirmasiSampah('anorganik')">
+    ✔ Konfirmasi
+</button>
+
+                </div>
+
+                <div class="waste-card b3">
+                    <img src="b3.jpeg" class="waste-logo" alt="B3">
+                    <h3>B3</h3>
+                    <p id="b3Count">0 kg</p>
+                    <input type="number" step="0.1" id="input-b3" placeholder="+ / - jumlah (kg)">
+                  <button class="btn-konfirmasi" onclick="konfirmasiSampah('b3')">
+    ✔ Konfirmasi
+</button>
+
+                </div>
+
+                <div class="waste-card kertas">
+                    <img src="paper.jpeg" class="waste-logo" alt="Kertas">
+                    <h3>Kertas</h3>
+                    <p id="kertasCount">0 kg</p>
+                    <input type="number" step="0.1" id="input-kertas" placeholder="+ / - jumlah (kg)">
+                   <button class="btn-konfirmasi" onclick="konfirmasiSampah('kertas')">
+    ✔ Konfirmasi
+</button>
+
+                </div>
+
+                <div class="waste-card residu">
+                    <img src="residu.jpeg" class="waste-logo" alt="Residu">
+                    <h3>Residu</h3>
+                    <p id="residuCount">0 kg</p>
+                    <input type="number" step="0.1" id="input-residu" placeholder="+ / - jumlah (kg)">
+                   <button class="btn-konfirmasi" onclick="konfirmasiSampah('residu')">
+    ✔ Konfirmasi
+</button>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div id="konsultasi" class="page">
+    <section class="content-section">
+        <div class="container">
+            <h2>Konsultasi Lingkungan</h2>
+
+            <p style="text-align:center">
+                Konsultasi pengelolaan lingkungan
+                untuk sekolah, perkantoran, dan institusi.
+            </p>
+        </div>
+    </section>
+</div>
+
+
+
+    <!-- Kontak Page -->
+    <div id="kontak" class="page">
+        <section class="content-section">
+            <div class="container">
+                <h2>Hubungi Kami</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Informasi Kontak</h3>
+                        <p><strong>Alamat:</strong> Jalan Gubernur H. Ahmad Bastari, 15 Ulu, Kecamatan Seberang Ulu I, Kota Palembang, Sumatera Selatan,</p>
+                        <p><strong>Email:</strong> ecosimbels@email.com</p>
+                        <p><strong>Telepon:</strong> (0711) XXX-XXXX</p>
+                        <p><strong>Wilayah Operasional:</strong> SMA Negeri 19 Palembang</p>
+                    </div>
+                    <form class="contact-form" id="contactForm">
+                        <input type="text" name="nama" placeholder="Nama Anda" required>
+                        <input type="email" name="email" placeholder="Email Anda" required>
+                        <input type="text" name="subjek" placeholder="Subjek">
+                        <textarea name="pesan" placeholder="Pesan Anda" rows="5" required></textarea>
+                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 EcoSimbel's. Semua hak cipta dilindungi.</p>
+            <p>Green Action for Better Future</p>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
