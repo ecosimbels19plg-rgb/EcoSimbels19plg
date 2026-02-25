@@ -22,11 +22,11 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="nav-brand" onclick="navigateTo('beranda')">
+            <div class="nav-brand">
                 <h1>🌱 EcoSimbel's</h1>
             </div>
             <ul class="nav-menu" id="navMenu">
-                <li><a class="nav-link" data-page="beranda">Beranda</a></li>
+                <li><a class="nav-link active" data-page="beranda">Beranda</a></li>
                 <li><a class="nav-link" data-page="tentang">Tentang Kami</a></li>
                 <li><a class="nav-link" data-page="tim">Tim Kami</a></li>
                 <li><a class="nav-link" data-page="layanan">Layanan</a></li>
@@ -37,18 +37,17 @@
     </nav>
 
     <!-- Beranda Page -->
-    <div id="beranda" class="page">
+    <div id="beranda" class="page active">
+        <button class="btn btn-primary nav-link" data-page="pengolahan">
+  ➕ Kelola Sampah Sekarang
+</button>
         <section class="hero">
             <div class="hero-content hero-box">
                 <h1>Transformasi Sampah Menjadi Nilai</h1>
                 <p>Kami adalah solusi terpadu untuk mengelola sampah domestik dan menciptakan ekonomi sirkular yang berkelanjutan</p>
-                <button class="btn btn-primary" onclick="navigateTo('kontak')">Bergabunglah Dengan Kami</button>
+                <button class="btn btn-primary nav-link" data-page="kontak">Bergabunglah Dengan Kami</button>
             </div>
         </section>
-        
-        <button onclick="trackAction('Tambah Sampah Organik')">
-  ➕ Tambah
-</button>
 
          <section class="hero">
             <div class="hero-content hero-box">
@@ -109,7 +108,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                 <div class="team-grid">
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Kepsek.jpg" alt="Foto Profil">
+    <img src="assets/img/Kepsek.jpg" alt="Foto Profil">
 </div>
                         <h3>Binti Koniaturrohmah, M.Pd</h3>
                         <p class="position">Kepala SMA Negeri 19 Palembang</p>
@@ -118,7 +117,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Kurikulum.jpg" alt="Foto Profil">
+    <img src="assets/img/Kurikulum.jpg" alt="Foto Profil">
 </div>
                         <h3>Efni Lastiyani Septiasari, S.Pd.,M.M</h3>
                         <p class="position">Wakil Kurikulum SMA Negeri 19 Palembang</p>
@@ -127,7 +126,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Kesiswaan.jpg" alt="Foto Profil">
+    <img src="assets/img/Kesiswaan.jpg" alt="Foto Profil">
 </div>
                         <h3>Agus Yoga Saputra, S.Pd.,Gr.MM</h3>
                         <p class="position">Wakil Kesiswaan SMA Negeri 19 Palembang</p>
@@ -136,7 +135,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Humas.jpg" alt="Foto Profil">
+    <img src="assets/img/Humas.jpg" alt="Foto Profil">
 </div>
                         <h3>David Hendrianto, S.Pd., M.Si</h3>
                         <p class="position">Wakil Humas SMA Negeri 19 Palembang</p>
@@ -145,7 +144,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Sarana.jpg" alt="Foto Profil">
+    <img src="assets/img/Sarana.jpg" alt="Foto Profil">
 </div>
                         <h3>Sukanto, S.Pd., M.Pd</h3>
                         <p class="position">Sarana Prasarana SMA Negeri 19 Palembang</p>
@@ -154,7 +153,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Adiwiyata.jpg" alt="Foto Profil">
+    <img src="assets/img/Adiwiyata.jpg" alt="Foto Profil">
 </div>
                         <h3>Edwin Effendi, S.Pd</h3>
                         <p class="position">Ketua Adiwiyata SMA Negeri 19 Palembang</p>
@@ -163,7 +162,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Pembimbing.jpg" alt="Foto Profil">
+    <img src="assets/img/Pembimbing.jpg" alt="Foto Profil">
 </div>
                         <h3>Ardiansyah, S.S., S.Kom</h3>
                         <p class="position">Guru Pembimbing</p>
@@ -172,7 +171,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Rizki.jpg" alt="Foto Profil">
+    <img src="assets/img/Rizki.jpg" alt="Foto Profil">
 </div>
                         <h3>Rizki Asmadi</h3>
                         <p class="position">Ketua EcoSimbel's Gen-1</p>
@@ -181,7 +180,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Khanza.jpg" alt="Foto Profil">
+    <img src="assets/img/Khanza.jpg" alt="Foto Profil">
 </div>
                         <h3>Khanza Fithria Meyrori</h3>
                         <p class="position">Wakil Ketua EcoSimbel's Gen-1</p>
@@ -190,7 +189,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     
                     <div class="team-card">
 <div class="team-avatar">
-    <img src="Nyimas.jpg" alt="Foto Profil">
+    <img src="assets/img/Nyimas.jpg" alt="Foto Profil">
 </div>
                         <h3>Nyimas Nabilah Rizkiah</h3>
                         <p class="position">Sekretaris EcoSimbel's Gen-1</p>
@@ -208,25 +207,25 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                 <h2>Layanan Kami</h2>
                 <div class="services-grid">
 
-            <div class="service-item" onclick="navigateTo('edukasi')" style="cursor:pointer">
+            <div class="service-item nav-link" data-page="edukasi" style="cursor:pointer">
                 <div class="service-icon">📚</div>
                 <h3>Edukasi</h3>
                 <p>Program edukasi lingkungan berbasis Adiwiyata.</p>
             </div>
 
-            <div class="service-item" onclick="navigateTo('pendampingan')" style="cursor:pointer">
+            <div class="service-item nav-link" data-page="pendampingan" style="cursor:pointer">
                 <div class="service-icon">🤝</div>
                 <h3>Pendampingan</h3>
                 <p>Pendampingan unit bank sampah dan sekolah.</p>
             </div>
 
-            <div class="service-item" onclick="navigateTo('pengolahan')" style="cursor:pointer">
+            <div class="service-item nav-link" data-page="pengolahan" style="cursor:pointer">
                 <div class="service-icon">♻️</div>
                 <h3>Pengolahan Limbah</h3>
                 <p>Pengelolaan dan daur ulang sampah ramah lingkungan.</p>
             </div>
 
-            <div class="service-item" onclick="navigateTo('konsultasi')" style="cursor:pointer">
+            <div class="service-item nav-link" data-page="konsultasi" style="cursor:pointer">
                 <div class="service-icon">🏢</div>
                 <h3>Konsultasi</h3>
                 <p>Konsultasi pengelolaan lingkungan untuk berbagai instansi.</p>
@@ -309,7 +308,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
             <div class="waste-container">
 
                 <div class="waste-card organik">
-                    <img src="organic.jpeg" class="waste-logo" alt="Organik">
+                    <img src="icons/organic.jpeg" class="waste-logo" alt="Organik">
                     <h3>Organik</h3>
                     <p id="organikCount">0 kg</p>
                     <input type="number" step="0.1" id="input-organik" placeholder="+ / - jumlah (kg)">
@@ -320,7 +319,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                 </div>
 
                 <div class="waste-card anorganik">
-                    <img src="anorganic.jpeg" class="waste-logo" alt="Anorganik">
+                    <img src="icons/anorganic.jpeg" class="waste-logo" alt="Anorganik">
                     <h3>Anorganik</h3>
                     <p id="anorganikCount">0 kg</p>
                     <input type="number" step="0.1" id="input-anorganik" placeholder="+ / - jumlah (kg)">
@@ -331,7 +330,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                 </div>
 
                 <div class="waste-card b3">
-                    <img src="b3.jpeg" class="waste-logo" alt="B3">
+                    <img src="icons/b3.jpeg" class="waste-logo" alt="B3">
                     <h3>B3</h3>
                     <p id="b3Count">0 kg</p>
                     <input type="number" step="0.1" id="input-b3" placeholder="+ / - jumlah (kg)">
@@ -342,7 +341,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                 </div>
 
                 <div class="waste-card kertas">
-                    <img src="paper.jpeg" class="waste-logo" alt="Kertas">
+                    <img src="icons/paper.jpeg" class="waste-logo" alt="Kertas">
                     <h3>Kertas</h3>
                     <p id="kertasCount">0 kg</p>
                     <input type="number" step="0.1" id="input-kertas" placeholder="+ / - jumlah (kg)">
@@ -353,7 +352,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                 </div>
 
                 <div class="waste-card residu">
-                    <img src="residu.jpeg" class="waste-logo" alt="Residu">
+                    <img src="icons/residu (1).jpg" class="waste-logo" alt="Residu">
                     <h3>Residu</h3>
                     <p id="residuCount">0 kg</p>
                     <input type="number" step="0.1" id="input-residu" placeholder="+ / - jumlah (kg)">
