@@ -1,7 +1,57 @@
+/* =========================
+   PAGE NAVIGATION SYSTEM
+========================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  function showPage(pageId) {
+    document.querySelectorAll(".page").forEach(page => {
+      page.classList.remove("active");
+    });
+
+    const target = document.getElementById(pageId);
+    if (target) {
+      target.classList.add("active");
+      animatePage(pageId);
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", function () {
+      const pageId = this.getAttribute("data-page");
+      if (!pageId) return;
+
+      document.querySelectorAll(".nav-menu .nav-link")
+        .forEach(l => l.classList.remove("active"));
+
+      const menuLink = document.querySelector(
+        `.nav-menu .nav-link[data-page="${pageId}"]`
+      );
+      if (menuLink) menuLink.classList.add("active");
+
+      showPage(pageId);
+    });
+  });
+
+  showPage("beranda");
+
+  ambilDariLocal();
+  ambilHistori();
+  renderSampah();
+  renderHistori();
+  updateAdminUI();
+  initChart();
+});
+
 
 /* =========================
    ROLE USER
 ========================= */
+
 let roleUser = localStorage.getItem("roleUser") || "siswa";
 
 function loginAdmin() {
@@ -35,12 +85,26 @@ function updateAdminUI() {
   logoutBtn.style.display = roleUser === "admin" ? "inline-block" : "none";
 }
 
+
+/* =========================
+   HAMBURGER MENU
+========================= */
+
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger?.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
+});
+
+
 /* =========================
    KONFIGURASI SAMPAH
 ========================= */
+
 const wasteConfig = {
   organik:   { label: "Organik",   color: "#74c69d" },
-  anorganik:{ label: "Anorganik", color: "#f4a261" },
+  anorganik: { label: "Anorganik", color: "#f4a261" },
   b3:        { label: "B3",        color: "#e63946" },
   kertas:    { label: "Kertas",    color: "#457b9d" },
   residu:    { label: "Residu",    color: "#6c757d" }
@@ -52,6 +116,7 @@ Object.keys(wasteConfig).forEach(k => dataSampah[k] = 0);
 /* =========================
    HISTORI
 ========================= */
+
 let historiSampah = [];
 
 function renderHistori() {
@@ -59,6 +124,7 @@ function renderHistori() {
   if (!body) return;
 
   body.innerHTML = "";
+
   historiSampah.forEach(item => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -72,11 +138,14 @@ function renderHistori() {
   });
 }
 
+
 /* =========================
    RENDER SAMPAH
 ========================= */
+
 function renderSampah() {
   Object.keys(wasteConfig).forEach(jenis => {
+
     const countEl = document.getElementById(`${jenis}Count`);
     const inputEl = document.getElementById(`input-${jenis}`);
     const btn = inputEl?.nextElementSibling;
@@ -91,10 +160,13 @@ function renderSampah() {
   });
 }
 
+
 /* =========================
    KONFIRMASI TAMBAH / KURANG
 ========================= */
+
 function konfirmasiSampah(jenis) {
+
   if (roleUser !== "admin") {
     alert("Hanya admin yang bisa mengubah data!");
     return;
@@ -103,18 +175,27 @@ function konfirmasiSampah(jenis) {
   const input = document.getElementById(`input-${jenis}`);
   const nilai = parseFloat(input.value);
 
-  if (isNaN(nilai)) return alert("Masukkan jumlah!");
+  if (isNaN(nilai)) {
+    alert("Masukkan jumlah!");
+    return;
+  }
 
   const totalBaru = dataSampah[jenis] + nilai;
-  if (totalBaru < 0) return alert("Jumlah tidak boleh negatif!");
+
+  if (totalBaru < 0) {
+    alert("Jumlah tidak boleh negatif!");
+    return;
+  }
 
   dataSampah[jenis] = totalBaru;
 
   historiSampah.unshift({
-    jenis,
+    jenis: jenis,
     jumlah: nilai,
     waktu: new Date().toLocaleString("id-ID")
   });
+
+  trackAction("Update " + jenis);
 
   simpanKeLocal();
   simpanHistori();
@@ -125,9 +206,11 @@ function konfirmasiSampah(jenis) {
   input.value = "";
 }
 
+
 /* =========================
    LOCAL STORAGE
 ========================= */
+
 function simpanKeLocal() {
   localStorage.setItem("dataSampah", JSON.stringify(dataSampah));
 }
@@ -146,12 +229,15 @@ function ambilHistori() {
   if (data) historiSampah = JSON.parse(data);
 }
 
+
 /* =========================
-   CHART
+   CHART.JS
 ========================= */
+
 let wasteChart;
 
 function initChart() {
+
   const ctx = document.getElementById("wasteChart");
   if (!ctx) return;
 
@@ -168,36 +254,55 @@ function initChart() {
     },
     options: {
       responsive: true,
-      scales: { y: { beginAtZero: true } }
+      scales: {
+        y: { beginAtZero: true }
+      }
     }
   });
 }
 
 function updateChart() {
   if (!wasteChart) return;
+
   wasteChart.data.datasets[0].data =
     Object.keys(wasteConfig).map(k => dataSampah[k]);
+
   wasteChart.update();
 }
 
+
 /* =========================
-   INIT SAAT LOAD
+   GOOGLE ANALYTICS TRACKING
 ========================= */
-document.addEventListener("DOMContentLoaded", () => {
-  ambilDariLocal();
-  ambilHistori();
-  renderSampah();
-  renderHistori();
-  updateAdminUI();
-  initChart();
-});
 
 function trackAction(actionName) {
   if (typeof gtag === "function") {
     gtag('event', actionName, {
       event_category: 'Waste Action',
-      event_label: 'EcoBel’s'
+      event_label: 'EcoSimbel'
     });
   }
 }
 
+
+/* =========================
+   ANIMASI PER PAGE
+========================= */
+
+function animatePage(pageId) {
+
+  const page = document.getElementById(pageId);
+  if (!page) return;
+
+  const animatedItems = page.querySelectorAll(
+    ".about-card, .team-card, .service-item, .waste-card"
+  );
+
+  animatedItems.forEach((item, index) => {
+    item.classList.remove("animate");
+
+    setTimeout(() => {
+      item.classList.add("animate");
+    }, index * 120);
+  });
+}
