@@ -119,7 +119,7 @@ body {
 .hero {
     background:
         linear-gradient(rgba(26,77,46,0.7), rgba(45,106,79,0.7)),
-        url("assets/img/Simbels.jpg");
+        url("../assets/img/Simbels.jpeg");
     background-size: cover;
     background-position: center;
     color: var(--white);
