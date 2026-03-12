@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoSimbel's</title>
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <meta name="google-site-verification" content="3Hr3EitpM7jAN4DcZOwdKsWl7qLdlRbA02xTuPrwYk0" />
     
 <!-- Google Analytics (GA4) -->
@@ -19,6 +19,30 @@
 
 </head>
 <body>
+   <div id="splash">
+
+    <div class="leaf-container">
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+        <span class="leaf">🍃</span>
+    </div>
+
+    <div class="splash-content">
+
+        <img src="assets/img/logo.jpeg" id="splashLogo">
+
+        <h1>EcoSimbel's</h1>
+
+        <p>Green Action for Better Future</p>
+
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+
+    </div>
+
+</div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -38,9 +62,50 @@
 
     <!-- Beranda Page -->
     <div id="beranda" class="page active">
-        <button class="btn btn-primary nav-link" data-page="pengolahan">
-  ➕ Kelola Sampah Sekarang
-</button>
+    <div id="earth-bg"></div>
+        <div class="dashboard-section">
+        <div class="dashboard-grid">
+
+  <div class="dashboard-card">
+    <h3>Total Sampah</h3>
+    <p id="totalWaste">0 kg</p>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>Jumlah Data</h3>
+    <p id="totalHistori">0</p>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>Sampah Terbanyak</h3>
+    <p id="topWaste">-</p>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>Status Sistem</h3>
+    <p class="online">🟢 Aktif</p>
+  </div>
+
+</div>
+
+<div class="chart-box">
+
+   <h3 class="chart-title">📊 Statistik Sampah</h3>
+
+   <div class="chart-container">
+    <canvas id="wasteChartHome"></canvas>
+   </div>
+
+</div>
+<div class="chart-box">
+<div class="ranking-box">
+
+<h3>🏆 Ranking Sampah Terbanyak</h3>
+
+<ul id="rankingWaste"></ul>
+</div>
+</div>
+</div>
         <section class="hero">
             <div class="hero-content hero-box">
                 <h1>Transformasi Sampah Menjadi Nilai</h1>
@@ -278,12 +343,15 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
 </div>
 
 <div style="margin-top:60px">
+<div class="chart-box">
 
-    <h2 style="text-align:center; color:#1a4d2e">
-        📊 Grafik Pengelolaan Sampah
-    </h2>
+   <h3 class="chart-title">📊 Grafik Pengelolaan Sampah</h3>
 
-    <canvas id="wasteChart" height="120"></canvas>
+   <div class="chart-container">
+    <canvas id="wasteChartManage" height="120"></canvas>
+   </div>
+
+</div>
 
     <h2 style="text-align:center; color:#1a4d2e; margin-top:50px">
         🧾 Histori Pengelolaan Sampah
@@ -392,7 +460,7 @@ Adalah menciptakan kondisi yang baik bagi sekolah untuk menjadi tempat pembelaja
                     <div class="contact-info">
                         <h3>Informasi Kontak</h3>
                         <p><strong>Alamat:</strong> Jalan Gubernur H. Ahmad Bastari, 15 Ulu, Kecamatan Seberang Ulu I, Kota Palembang, Sumatera Selatan,</p>
-                        <p><strong>Email:</strong> ecosimbels@email.com</p>
+                        <p><strong>Email:</strong> ecosimbels19plg@email.com</p>
                         <p><strong>Telepon:</strong> (0711) XXX-XXXX</p>
                         <p><strong>Wilayah Operasional:</strong> SMA Negeri 19 Palembang</p>
                     </div>
