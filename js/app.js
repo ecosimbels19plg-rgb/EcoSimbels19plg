@@ -1,3 +1,27 @@
+window.addEventListener("load", function(){
+
+    const splash = document.getElementById("splash");
+    const logo = document.getElementById("splashLogo");
+
+    setTimeout(()=>{
+
+        logo.classList.add("fly");
+
+    },2500);
+
+    setTimeout(()=>{
+
+        splash.classList.add("hide");
+
+    },3200);
+
+    setTimeout(()=>{
+
+        splash.style.display="none";
+
+    },4200);
+
+});
 /* =========================
    PAGE NAVIGATION SYSTEM
 ========================= */
@@ -45,7 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
   renderHistori();
   updateAdminUI();
   initChart();
-});
+  updateStats();
+  renderRanking();
+})
+
+;
 
 
 /* =========================
@@ -206,6 +234,24 @@ function konfirmasiSampah(jenis) {
   input.value = "";
 }
 
+function updateChart(){
+
+const data=Object.keys(wasteConfig).map(k=>dataSampah[k]);
+
+if(chartHome){
+chartHome.data.datasets[0].data=data;
+chartHome.update();
+}
+
+if(chartManage){
+chartManage.data.datasets[0].data=data;
+chartManage.update();
+}
+
+updateStats();
+renderRanking();
+
+}
 
 /* =========================
    LOCAL STORAGE
@@ -234,40 +280,55 @@ function ambilHistori() {
    CHART.JS
 ========================= */
 
-let wasteChart;
+let chartHome;
+let chartManage;
 
 function initChart() {
 
-  const ctx = document.getElementById("wasteChart");
-  if (!ctx) return;
+  const ctxHome = document.getElementById("wasteChartHome");
+  const ctxManage = document.getElementById("wasteChartManage");
 
-  wasteChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: Object.values(wasteConfig).map(w => w.label),
-      datasets: [{
-        label: "Jumlah Sampah (kg)",
-        data: Object.keys(wasteConfig).map(k => dataSampah[k]),
-        backgroundColor: Object.values(wasteConfig).map(w => w.color),
-        borderRadius: 12
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: { beginAtZero: true }
+  const labels = Object.values(wasteConfig).map(w => w.label);
+  const colors = Object.values(wasteConfig).map(w => w.color);
+  const data = Object.keys(wasteConfig).map(k => dataSampah[k]);
+
+  if (ctxHome) {
+    chartHome = new Chart(ctxHome, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Jumlah Sampah (kg)",
+          data: data,
+          backgroundColor: colors,
+          borderRadius: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
       }
-    }
-  });
-}
+    });
+  }
 
-function updateChart() {
-  if (!wasteChart) return;
-
-  wasteChart.data.datasets[0].data =
-    Object.keys(wasteConfig).map(k => dataSampah[k]);
-
-  wasteChart.update();
+  if (ctxManage) {
+    chartManage = new Chart(ctxManage, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Jumlah Sampah (kg)",
+          data: data,
+          backgroundColor: colors,
+          borderRadius: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  }
 }
 
 
@@ -305,4 +366,128 @@ function animatePage(pageId) {
       item.classList.add("animate");
     }, index * 120);
   });
+}
+
+function animateCounter(element,target){
+
+let start=0;
+const duration=800;
+const stepTime=20;
+const step=Math.ceil(target/(duration/stepTime));
+
+const timer=setInterval(()=>{
+
+start+=step;
+
+if(start>=target){
+start=target;
+clearInterval(timer);
+}
+
+element.textContent=start.toFixed(1)+" kg";
+
+},stepTime);
+
+}
+
+function renderRanking(){
+
+const list=document.getElementById("rankingWaste");
+if(!list) return;
+
+list.innerHTML="";
+
+const sorted=Object.entries(dataSampah)
+.sort((a,b)=>b[1]-a[1]);
+
+sorted.forEach(item=>{
+
+const li=document.createElement("li");
+
+li.innerHTML=`
+<span>${wasteConfig[item[0]].label}</span>
+<strong>${item[1].toFixed(1)} kg</strong>
+`;
+
+list.appendChild(li);
+
+});
+
+}
+
+function updateStats(){
+
+const totalWasteEl=document.getElementById("totalWaste");
+const totalHistoriEl=document.getElementById("totalHistori");
+const topWasteEl=document.getElementById("topWaste");
+
+if(!totalWasteEl) return;
+
+let total=0;
+let maxJenis="";
+let maxValue=0;
+
+Object.entries(dataSampah).forEach(([jenis,value])=>{
+
+total+=value;
+
+if(value>maxValue){
+maxValue=value;
+maxJenis=wasteConfig[jenis].label;
+}
+
+});
+
+totalWasteEl.textContent=total.toFixed(1)+" kg";
+
+if(totalHistoriEl){
+totalHistoriEl.textContent=historiSampah.length;
+}
+
+if(topWasteEl){
+topWasteEl.textContent=maxJenis || "-";
+}
+
+}
+
+if(document.getElementById("earth-bg")){
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth / window.innerHeight,
+0.1,
+1000
+);
+
+const renderer = new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+document.getElementById("earth-bg").appendChild(renderer.domElement);
+
+const geometry = new THREE.SphereGeometry(5, 32, 32);
+
+const textureLoader = new THREE.TextureLoader();
+const earthTexture = textureLoader.load(
+"https://threejsfundamentals.org/threejs/resources/images/earth-day.jpg"
+);
+
+const material = new THREE.MeshBasicMaterial({map:earthTexture});
+const earth = new THREE.Mesh(geometry, material);
+
+scene.add(earth);
+
+camera.position.z = 10;
+
+function animate(){
+requestAnimationFrame(animate);
+
+earth.rotation.y += 0.002;
+
+renderer.render(scene, camera);
+}
+
+animate();
+
 }
