@@ -1,4 +1,8 @@
+
 window.addEventListener("load", function(){
+
+    tampilkanDokumentasi();
+    tampilkanFiturAdmin();
 
     const splash = document.getElementById("splash");
     const logo = document.getElementById("splashLogo");
@@ -31,18 +35,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
 
   function showPage(pageId) {
-    document.querySelectorAll(".page").forEach(page => {
-      page.classList.remove("active");
-    });
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
 
-    const target = document.getElementById(pageId);
-    if (target) {
-      target.classList.add("active");
-      animatePage(pageId);
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const target = document.getElementById(pageId);
+  if (target) {
+    target.classList.add("active");
+    animatePage(pageId);
   }
+
+  // 🔥 TAMBAHAN INI
+  setTimeout(() => {
+    initChart();
+    updateChart();
+  }, 200);
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
   navLinks.forEach(link => {
     link.addEventListener("click", function () {
@@ -69,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
   renderHistori();
   updateAdminUI();
   initChart();
+  updateChart();
   updateStats();
   renderRanking();
 })
@@ -80,27 +91,67 @@ document.addEventListener("DOMContentLoaded", function () {
    ROLE USER
 ========================= */
 
-let roleUser = localStorage.getItem("roleUser") || "siswa";
+
+
+let isAdmin = false;
 
 function loginAdmin() {
-  const password = prompt("Masukkan password admin:");
-  if (password === "admin123") {
-    roleUser = "admin";
-    localStorage.setItem("roleUser", "admin");
-    alert("Login admin berhasil");
-    renderSampah();
-    updateAdminUI();
-  } else {
-    alert("Password salah!");
-  }
+    const password = prompt("Masukkan password admin:");
+
+    if (password === "admin123") {
+        isAdmin = true;
+        alert("Login berhasil!");
+        tampilkanFiturAdmin();
+        renderSampah();
+        updateChart();
+    } else {
+        alert("Password salah!");
+    }
+}
+
+function refreshUI() {
+  tampilkanFiturAdmin();
+  renderSampah();
+  updateStats();
+  renderRanking();
 }
 
 function logoutAdmin() {
-  roleUser = "siswa";
-  localStorage.setItem("roleUser", "siswa");
-  alert("Logout berhasil");
-  renderSampah();
-  updateAdminUI();
+    isAdmin = false;
+    alert("Logout berhasil!");
+    tampilkanFiturAdmin();
+}
+
+function tampilkanFiturAdmin() {
+
+    // 🔹 tombol login/logout
+    const loginBtn = document.querySelector("button[onclick='loginAdmin()']");
+    const logoutBtn = document.querySelector("button[onclick='logoutAdmin()']");
+
+    loginBtn.style.display = isAdmin ? "none" : "inline-block";
+    logoutBtn.style.display = isAdmin ? "inline-block" : "none";
+
+    // 🔹 form upload dokumentasi
+    const adminUpload = document.getElementById("adminUpload");
+    if (adminUpload) {
+        adminUpload.style.display = isAdmin ? "block" : "none";
+    }
+
+    // 🔹 input pengelolaan sampah
+    const inputSampah = document.querySelectorAll(".waste-card input, .btn-konfirmasi");
+
+    inputSampah.forEach(el => {
+        el.style.display = isAdmin ? "block" : "none";
+    });
+
+    // refresh tampilan dokumentasi (biar tombol hapus muncul/hilang)
+    tampilkanDokumentasi();
+
+    const historiSection = document.getElementById("historiSection");
+
+if(historiSection){
+    historiSection.style.display = isAdmin ? "block" : "none";
+}
 }
 
 function updateAdminUI() {
@@ -109,8 +160,8 @@ function updateAdminUI() {
 
   if (!loginBtn || !logoutBtn) return;
 
-  loginBtn.style.display = roleUser === "admin" ? "none" : "inline-block";
-  logoutBtn.style.display = roleUser === "admin" ? "inline-block" : "none";
+  loginBtn.style.display = isAdmin ? "none" : "inline-block";
+  logoutBtn.style.display = isAdmin ? "inline-block" : "none";
 }
 
 
@@ -146,26 +197,109 @@ Object.keys(wasteConfig).forEach(k => dataSampah[k] = 0);
 ========================= */
 
 let historiSampah = [];
+let currentPage = 1;
+let perPage = 10;
 
-function renderHistori() {
-  const body = document.getElementById("historiBody");
-  if (!body) return;
+function renderHistori(){
 
-  body.innerHTML = "";
+let tbody = document.getElementById("historiBody");
+if(!tbody) return;
 
-  historiSampah.forEach(item => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${item.waktu}</td>
-      <td>${item.jenis.toUpperCase()}</td>
-      <td class="${item.jumlah >= 0 ? 'plus' : 'minus'}">
-        ${item.jumlah > 0 ? '+' : ''}${item.jumlah} kg
-      </td>
-    `;
-    body.appendChild(tr);
-  });
+tbody.innerHTML = "";
+
+// pagination
+let start = (currentPage - 1) * perPage;
+let end = start + perPage;
+let data = historiSampah.slice(start, end);
+
+data.forEach((item, index) => {
+
+let realIndex = start + index;
+
+let row = `
+<tr>
+<td>${item.waktu}</td>
+<td>${item.jenis.toUpperCase()}</td>
+<td class="${item.jumlah >= 0 ? 'plus' : 'minus'}">
+${item.jumlah > 0 ? '+' : ''}${item.jumlah} kg
+</td>
+<td>
+${isAdmin ? `<button onclick="hapusHistori(${realIndex})">🗑️</button>` : ""}
+</td>
+</tr>
+`
+;
+
+tbody.innerHTML += row;
+
+});
+
+updateButtons(); // penting!
 }
 
+function hapusHistori(index){
+
+if(confirm("Yakin ingin menghapus data ini?")){
+
+// hapus data
+historiSampah.splice(index, 1);
+
+// 🔥 HITUNG ULANG data sampah
+resetDataSampah();
+
+// simpan ulang
+localStorage.setItem("historiSampah", JSON.stringify(historiSampah));
+localStorage.setItem("dataSampah", JSON.stringify(dataSampah));
+
+// render ulang semua
+renderHistori();
+renderSampah();
+updateChart();
+
+}
+
+}
+
+function resetDataSampah(){
+
+// reset semua ke 0
+Object.keys(dataSampah).forEach(jenis=>{
+dataSampah[jenis] = 0;
+});
+
+// hitung ulang dari histori
+historiSampah.forEach(item=>{
+dataSampah[item.jenis] += item.jumlah;
+});
+
+}
+
+document.getElementById("nextBtn").onclick = function(){
+
+if(currentPage * perPage < historiSampah.length){
+currentPage++;
+renderHistori();
+}
+
+};
+
+document.getElementById("prevBtn").onclick = function(){
+
+if(currentPage > 1){
+currentPage--;
+renderHistori();
+}
+
+};
+
+function updateButtons(){
+
+document.getElementById("prevBtn").disabled = currentPage === 1;
+
+document.getElementById("nextBtn").disabled =
+currentPage * perPage >= historiSampah.length;
+
+}
 
 /* =========================
    RENDER SAMPAH
@@ -182,7 +316,7 @@ function renderSampah() {
       countEl.textContent = dataSampah[jenis].toFixed(1) + " kg";
     }
 
-    const disabled = roleUser !== "admin";
+    const disabled = !isAdmin;
     if (inputEl) inputEl.disabled = disabled;
     if (btn) btn.disabled = disabled;
   });
@@ -195,7 +329,7 @@ function renderSampah() {
 
 function konfirmasiSampah(jenis) {
 
-  if (roleUser !== "admin") {
+  if (!isAdmin) {
     alert("Hanya admin yang bisa mengubah data!");
     return;
   }
@@ -236,21 +370,20 @@ function konfirmasiSampah(jenis) {
 
 function updateChart(){
 
-const data=Object.keys(wasteConfig).map(k=>dataSampah[k]);
+  const data = Object.keys(wasteConfig).map(k => dataSampah[k] || 0);
 
-if(chartHome){
-chartHome.data.datasets[0].data=data;
-chartHome.update();
-}
+  if(chartHome){
+    chartHome.data.datasets[0].data = data;
+    chartHome.update();
+  }
 
-if(chartManage){
-chartManage.data.datasets[0].data=data;
-chartManage.update();
-}
+  if(chartManage){
+    chartManage.data.datasets[0].data = data;
+    chartManage.update();
+  }
 
-updateStats();
-renderRanking();
-
+  updateStats();
+  renderRanking();
 }
 
 /* =========================
@@ -267,7 +400,15 @@ function simpanHistori() {
 
 function ambilDariLocal() {
   const data = localStorage.getItem("dataSampah");
-  if (data) dataSampah = JSON.parse(data);
+
+  if (data) {
+    const parsed = JSON.parse(data);
+
+    // 🔥 pastikan semua jenis tetap ada
+    Object.keys(wasteConfig).forEach(k => {
+      dataSampah[k] = parsed[k] || 0;
+    });
+  }
 }
 
 function ambilHistori() {
@@ -290,7 +431,6 @@ function initChart() {
 
   const labels = Object.values(wasteConfig).map(w => w.label);
   const colors = Object.values(wasteConfig).map(w => w.color);
-  const data = Object.keys(wasteConfig).map(k => dataSampah[k]);
 
   if (ctxHome) {
     chartHome = new Chart(ctxHome, {
@@ -299,7 +439,7 @@ function initChart() {
         labels: labels,
         datasets: [{
           label: "Jumlah Sampah (kg)",
-          data: data,
+          data: [], // kosong dulu
           backgroundColor: colors,
           borderRadius: 10
         }]
@@ -318,7 +458,7 @@ function initChart() {
         labels: labels,
         datasets: [{
           label: "Jumlah Sampah (kg)",
-          data: data,
+          data: [],
           backgroundColor: colors,
           borderRadius: 10
         }]
@@ -329,6 +469,9 @@ function initChart() {
       }
     });
   }
+
+  // 🔥 penting
+  updateChart();
 }
 
 
@@ -490,4 +633,147 @@ renderer.render(scene, camera);
 
 animate();
 
+}
+
+const faqQuestions = document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.parentElement;
+    const answer = btn.nextElementSibling;
+
+    document.querySelectorAll(".faq-item").forEach(item => {
+      if(item !== btn.parentElement){
+        item.classList.remove("active");
+        item.querySelector(".faq-answer").style.maxHeight = null;
+      }
+    });
+
+    // toggle class active
+    item.classList.toggle("active");
+
+    if(answer.style.maxHeight){
+      answer.style.maxHeight = null;
+    } else {
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    }
+  });
+});
+
+function uploadDokumentasi() {
+
+    if (!isAdmin) {
+        alert("Hanya admin yang bisa upload!");
+        return;
+    }
+
+    const files = document.getElementById("mediaInput").files;
+    const nama = document.getElementById("activityName").value;
+    const tanggal = document.getElementById("activityDate").value;
+
+    if (files.length === 0 || !nama || !tanggal) {
+        alert("Lengkapi semua data!");
+        return;
+    }
+
+    let mediaList = [];
+    let selesai = 0;
+
+    Array.from(files).forEach(file => {
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+
+            mediaList.push({
+                src: e.target.result,
+                type: file.type
+            });
+
+            selesai++;
+
+            if (selesai === files.length) {
+
+                let data = JSON.parse(localStorage.getItem("dokumentasi")) || [];
+
+                data.push({
+                    nama,
+                    tanggal,
+                    media: mediaList
+                });
+
+                localStorage.setItem("dokumentasi", JSON.stringify(data));
+
+                tampilkanDokumentasi();
+
+                // reset form
+                document.getElementById("mediaInput").value = "";
+                document.getElementById("activityName").value = "";
+                document.getElementById("activityDate").value = "";
+
+                alert("Upload berhasil!");
+            }
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+function tampilkanDokumentasi() {
+
+    const container = document.getElementById("documentationList");
+    let data = JSON.parse(localStorage.getItem("dokumentasi")) || [];
+
+    container.innerHTML = "";
+
+    data.forEach((item, index) => {
+
+        let mediaHTML = "";
+
+        item.media.forEach(m => {
+            if (m.type.startsWith("image")) {
+                mediaHTML += `<img src="${m.src}" class="media-item">`;
+            } else {
+                mediaHTML += `<video src="${m.src}" controls class="media-item"></video>`;
+            }
+        });
+
+        container.innerHTML = `
+            <div class="dokumentasi-item">
+
+                <div class="media-slider">
+                    ${mediaHTML}
+                </div>
+
+                <p class="judul-kegiatan">
+                    ${item.nama} (${item.tanggal})
+                </p>
+
+                ${isAdmin ? `<button onclick="hapusDokumentasi(${index})">🗑 Hapus</button>` : ""}
+            </div>
+        ` + container.innerHTML;
+
+    });
+}
+
+function hapusDokumentasi(index) {
+    let data = JSON.parse(localStorage.getItem("dokumentasi")) || [];
+    data.splice(index, 1);
+    localStorage.setItem("dokumentasi", JSON.stringify(data));
+    tampilkanDokumentasi();
+}
+
+function toggleCard(header) {
+  const card = header.parentElement;
+  const body = header.nextElementSibling;
+
+  document.querySelectorAll(".card").forEach(c => {
+    if (c !== card) c.classList.remove("active");
+  });
+
+  card.classList.toggle("active");
+
+  if(body){
+    body.scrollTop = 0; // reset scroll
+  }
 }
