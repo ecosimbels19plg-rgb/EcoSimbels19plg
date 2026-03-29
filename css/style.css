@@ -1,3 +1,4 @@
+
 /* SPLASH */
 
 #splash{
@@ -106,9 +107,6 @@
     --transition: all 0.3s ease;
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -629,6 +627,12 @@ justify-content:space-between;
   background-position:center;
 }
 
+#faq{
+  background-image:url("../assets/img/eco.png");
+  background-size:cover;
+  background-position:center;
+}
+
 #beranda{
   background:none;
 }
@@ -677,4 +681,241 @@ overflow:hidden;
 .dashboard{
 position:relative;
 z-index:2;
+}
+
+.dashboard-summary{
+  max-width:700px;
+  margin:30px auto;
+  background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(6px);
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+.dashboard-summary h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#2d6a4f;
+}
+
+.summary-item{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+  font-size:16px;
+}
+
+.summary-item:last-child{
+  border-bottom:none;
+}
+
+.summary-item strong{
+  color:#1b4332;
+}
+
+.faq{
+  max-width:800px;
+  margin:30px auto;
+}
+
+.faq-item{
+  background:rgba(255,255,255,0.9);
+  margin-bottom:15px;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.faq-question {
+  width:100%;
+  padding:15px;
+  text-align:left;
+  border:none;
+  background:#2d6a4f;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  position:relative;
+}
+
+/* panah */
+.faq-question::after{
+  content:"▼";
+  position:absolute;
+  right:15px;
+  transition:0.3s;
+}
+
+/* saat aktif (dipencet) */
+.faq-item.active .faq-question::after{
+  transform:rotate(180deg);
+}
+
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:0.3s;
+  background:white;
+  padding:0 15px;
+}
+
+.faq-answer p{
+  margin:10px 0;
+}
+
+.media-slider {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px;
+    scroll-snap-type: x mandatory;
+}
+
+.media-item {
+    min-width: 250px;
+    max-height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    scroll-snap-align: start;
+}
+
+.dokumentasi-item {
+    margin-bottom: 30px;
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.judul-kegiatan {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* HEADER */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.card-header img {
+  width: 40px;
+}
+
+.card-header span {
+  flex: 1;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+/* PANAH */
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+/* BODY (ANIMASI SMOOTH) */
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.3s ease;
+  padding-right: 5px;
+}
+
+.card-body ul {
+  padding: 10px 0;
+}
+
+/* AKTIF */
+.card.active .card-body {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.card.active .arrow {
+  transform: rotate(180deg);
+}
+
+.edukasi-box {
+  background: #ffffff;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  line-height: 1.6;
+}
+
+.edukasi-box h2 {
+  margin-bottom: 10px;
+  color: #2d6a4f;
+}
+
+.edukasi-box p {
+  margin-bottom: 10px;
+}
+
+/* Box kecil dalam pengolahan */
+.olah-item {
+  background: #f1fdf6;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.olah-item h4 {
+  margin-bottom: 5px;
+}
+
+.nav-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:40px;
+    height:40px;
+    object-fit:cover;
+    border-radius:50%;
+    background:white;
+    padding:3px;
+}
+
+.brand-text{
+    color:white;
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+#videoIntro{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 9999;
+}
+
+.video-container iframe{
+  width: 100%;
+  height: 100%;
 }
